@@ -23,12 +23,18 @@ function check(s){
     var upperletter = false;
     var number = false;
     var length = s.length;
+    var beforechar = '';
+    var beforechar2 = '';
     //length check
     if (length < min || length > max) return false;
-    //check password that contains upperletter and number at least 1
+    //confirm password contains upperletter and number at least 1
     for (let property of s){
         if (property == property.toUpperCase()) upperletter = true;
-        if (isNaN(property) == false) number = true;   
+        if (isNaN(property) == false) number = true;
+        //ban 3 consective same chars
+        if (property == beforechar && property == beforechar2) return false;
+        beforechar2 = beforechar;
+        beforechar = property;
     }
     return upperletter && number;
 }
